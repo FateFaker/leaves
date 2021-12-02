@@ -44,7 +44,7 @@ func xgTreeFromTreeModel(origTree *xgbin.TreeModel, numFeatures uint32) (lgTree,
 	// XGBoost doesn't support categorical features
 	t.nCategorical = 0
 
-	if numNodes == 1 {
+	if numNodes - origTree.Param.NumDeleted == 1 {
 		// special case - constant value tree
 		t.leafValues = append(t.leafValues, float64(origTree.Nodes[0].Info))
 		return t, nil
